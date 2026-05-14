@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yayubi AI - Smart Catering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --primary-glow: rgba(255, 107, 53, 0.3);
+            --bg-app: #F8F9FD;
+            --sidebar-bg: #FFFFFF;
+            --text-dark: #1D1D1F;
+            --glass: rgba(255, 255, 255, 0.8);
+            --bot-bubble: #FFFFFF;
+        }
+
+        .dark-theme {
+            --bg-app: #0F172A;
+            --sidebar-bg: #1E293B;
+            --text-dark: #F8FAFC;
+            --glass: rgba(30, 41, 59, 0.7);
+            --bot-bubble: #334155;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.3s, color 0.3s; }
+
+        body { background: var(--bg-app); color: var(--text-dark); height: 100vh; overflow: hidden; }
+
+        .app-wrapper { display: flex; width: 100%; height: 100vh; }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid rgba(0,0,0,0.05);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1024px) { .sidebar { display: none; } }
+
+        .logo-area { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; color: var(--primary); }
+        .nav-item { padding: 12px 15px; border-radius: 12px; color: #64748B; font-weight: 600; list-style: none; }
+        .nav-item.active { background: var(--primary); color: white; box-shadow: 0 8px 15px var(--primary-glow); }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 15px;
+            background: var(--primary-glow);
+            border-radius: 12px;
+            border: 1px dashed var(--primary);
+            font-size: 11px;
+            line-height: 1.5;
+            color: var(--text-dark);
+        }
+
+        /* CHAT VIEW */
+        .chat-view { flex: 1; display: flex; flex-direction: column; height: 100%; position: relative; min-width: 0; }
+
+        header {
+            padding: 15px 25px;
+            background: var(--glass);
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+
+        .bot-profile { display: flex; align-items: center; gap: 12px; }
+        .bot-avatar { width: 45px; height: 45px; border-radius: 14px; border: 2px solid var(--primary); pointer-events: none; }
+        .bot-info h3 { font-size: 16px; font-weight: 800; }
+        .bot-info small { color: #20C997; font-weight: 800; font-size: 10px; }
+
+        #chatBody {
+            flex: 1;
+            padding: 20px 5%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media (min-width: 1025px) { #chatBody { padding: 30px 15%; } }
+
+        .message { 
+            max-width: 85%; 
+            padding: 14px 18px; 
+            border-radius: 20px; 
+            font-size: 14px; 
+            line-height: 1.6;
+            animation: popIn 0.4s ease-out;
+        }
+
+        @keyframes popIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .bot-msg { background: var(--bot-bubble); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .user-msg { background: linear-gradient(135deg, #FF6B35, #FF9F1C); color: white; align-self: flex-end; border-bottom-right-radius: 4px; box-shadow: 0 8px 20px var(--primary-glow); }
+
+        /* FOOTER AREA */
+        .footer-area { padding: 15px 5% 25px; }
+        @media (min-width: 1025px) { .footer-area { padding: 20px 15% 35px; } }
+
+        .suggestions { 
+            display: flex; 
+            gap: 12px; 
+            overflow-x: auto; 
+            padding: 10px 5px; 
+        }
+        .suggestions::-webkit-scrollbar { display: none; }
+
+        .chip {
+            background: var(--sidebar-bg);
+            padding: 10px 22px; 
+            border-radius: 50px;
+            font-size: 13px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            white-space: nowrap;
+            color: var(--text-dark);
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px var(--primary-glow);
+        }
+
+        .input-group {
+            background: var(--sidebar-bg);
+            padding: 8px 8px 8px 25px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .input-group input { flex: 1; border: none; background: transparent; outline: none; font-size: 15px; color: var(--text-dark); }
+        .send-btn { background: var(--primary); color: white; border: none; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .theme-btn { background: rgba(0,0,0,0.05); border: none; padding: 10px; border-radius: 12px; cursor: pointer; font-size: 20px; }
+
+        .typing { display: none; padding: 15px 20px; background: var(--bot-bubble); border-radius: 20px; width: fit-content; margin-bottom: 10px; }
+        .dot { width: 6px; height: 6px; background: var(--primary); border-radius: 50%; display: inline-block; margin: 0 2px; animation: wave 1.3s infinite; }
+        @keyframes wave { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+    <aside class="sidebar">
+        <div class="logo-area">🍱 Yayubi-AI</div>
+        <nav>
+            <div class="nav-item active">💬 Chat Assistant</div>                                    
+        </nav>
+        <div class="sidebar-footer">
+            <b>INFORMASI</b><br>
+            Catering lezat, higienis, dan tepat waktu oleh **Reizo Rajendra Dianta**.
+        </div>
+    </aside>
+
+    <main class="chat-view">
+        <header>
+            <div class="bot-profile">
+                <img src="logo ai.jpg" class="bot-avatar" alt="Logo">
+                <div class="bot-info">
+                    <h3>Yayubi AI Pro</h3>
+                    <small>● AKTIF</small>
+                </div>
+            </div>
+            <button class="theme-btn" onclick="toggleMode()">🌓</button>
+        </header>
+
+        <div id="chatBody">
+            <div class="message bot-msg">Halo 👋 Selamat datang di **Yayubi Catering**! <br>Pilihan tepat untuk acara spesial Anda. Ingin tanya apa hari ini? 😊</div>
+            <div class="typing" id="typingIndicator">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+        </div>
+
+        <div class="footer-area">
+            <div class="suggestions">
+                <div class="chip" onclick="quickAsk('Rekomendasi menu dong')">🍴 Rekomendasi Menu</div>
+                <div class="chip" onclick="quickAsk('Kenapa harus pilih Yayubi?')">✨ Keunggulan</div>
+                <div class="chip" onclick="quickAsk('Melayani area mana saja?')">📍 Area Layanan</div>
+                <div class="chip" onclick="quickAsk('Cara pesan gimana?')">📦 Cara Pesan</div>
+                <div class="chip" onclick="quickAsk('Siapa adminnya?')">🧑‍💻 Admin</div>
+                <div class="chip" onclick="quickAsk('Berapa harga cateringnya?')">💰 Harga</div>
+                <div class="chip" onclick="quickAsk('Minimal order berapa?')">📊 Minimal Order</div>
+                <div class="chip" onclick="quickAsk('Bisa untuk acara apa saja?')">🎉 Acara</div>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="userInput" placeholder="Tanya sesuatu..." onkeypress="if(event.key==='Enter') runChat()">
+                <button class="send-btn" onclick="runChat()">🚀</button>
+            </div>
+        </div>
+    </main>
+</div>
+
+<audio id="pop" src="https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3"></audio>
+
+<script>
+    const chatBody = document.getElementById('chatBody');
+    const userInput = document.getElementById('userInput');
+    const typing = document.getElementById('typingIndicator');
+    const pop = document.getElementById('pop');
+
+    function toggleMode() { document.body.classList.toggle('dark-theme'); }
+
+    function runChat() {
+        const val = userInput.value.trim();
+        if(!val) return;
+        addMsg(val, 'user-msg');
+        userInput.value = '';
+        typing.style.display = 'block';
+        chatBody.scrollTop = chatBody.scrollHeight;
+        
+        setTimeout(() => {
+            typing.style.display = 'none';
+            try { pop.play(); } catch(e) {}
+            const reply = aiLogic(val.toLowerCase());
+            addMsg(reply, 'bot-msg');
+        }, 800);
+    }
+
+    function addMsg(text, type) {
+        const d = document.createElement('div');
+        d.className = `message ${type}`;
+        d.innerHTML = text;
+        chatBody.insertBefore(d, typing);
+        chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+    }
+
+    function quickAsk(v) { 
+        userInput.value = v; 
+        runChat(); 
+    }
+
+    function aiLogic(input) {
+        let text = input.toLowerCase();
+
+        // HARGA (LOGIKA LAMA + EMOJI)
+        if (text.includes("harga") || text.includes("biaya")) {
+            return "💰 Daftar Harga Yayubi Catering:<br>• Snack Box: Mulai Rp2.000<br>• Nasi Box: Mulai Rp25.000<br>• Prasmanan: Mulai Rp50.000/porsi";
+        }
+
+        // MINIMAL ORDER (LOGIKA LAMA + EMOJI)
+        if (text.includes("minimal") || text.includes("porsi")) {
+            return "📊 Aturan Order:<br>Minimal pemesanan adalah 20 porsi. <br>Khusus Gratis Ongkir minimal 50 porsi ya! 🚚💨";
+        }
+
+        // ACARA (LOGIKA LAMA + EMOJI)
+        if (text.includes("acara")) {
+            return "🎉 Kami siap melayani:<br>🎂 Ulang Tahun<br>💍 Pernikahan<br>🏢 Acara Kantor<br>👨‍👩‍👧‍👦 Arisan/Keluarga";
+        }
+
+        // PENGIRIMAN (LOGIKA LAMA + EMOJI)
+        if (text.includes("kirim") || text.includes("pengiriman")) {
+            return "🚚 Info Pengiriman:<br>Kami melayani pengiriman area Semarang melalui kurir internal atau GoSend. Pesan H-1 ya! ⏱️";
+        }
+
+        // LOKASI (LOGIKA LAMA + EMOJI)
+        if (text.includes("lokasi") || text.includes("alamat") || text.includes("dimana")) {
+            return "📍 Lokasi: Yayubi Catering berpusat di Kota Semarang. Siap kirim ke seluruh sudut kota! 🏙️";
+        }
+
+        // ADMIN (LOGIKA LAMA + EMOJI)
+        if (text.includes("admin") || text.includes("siapa") || text.includes("owner") || text.includes("reizo")) {
+            return "🧑‍💻 Info Admin:<br>Owner & Admin kami adalah Reizo Rajendra Dianta. dan owner nya  Beliau siap memastikan makanan Anda spesial! ✨";
+        }
+
+        // REKOMENDASI MENU (LOGIKA BARU)
+        if (text.includes("rekomendasi") || text.includes("menu")) {
+            return "🍴 Rekomendasi Menu Favorit Yayubi:<br><br>" +
+                   "🔹 Kantor/Meeting: Nasi box ayam bakar & snack box manis gurih 🍱<br>" +
+                   "🔹 Keluarga/Santai: Nasi tumpeng mini & paket nasi box komplit 🎉<br>" +
+                   "🔹 Acara Besar: Paket prasmanan lengkap & tumpeng simbolis 🍽️<br><br>" +
+                   "Menu bisa di-custom sesuai budget kamu lho! 👍";
+        }
+
+        // AREA LAYANAN (LOGIKA BARU)
+        if (text.includes("area") || text.includes("wilayah") || text.includes("mana saja")) {
+            return "📍 Area Layanan:<br>Kami melayani area:<br>✅ Semarang Kota<br>✅ Tembalang<br>✅ Banyumanik<br>✅ Pedurungan<br>...dan sekitarnya! 🚚";
+        }
+
+        // JAM OPERASIONAL (LOGIKA BARU)
+        if (text.includes("jam") || text.includes("buka") || text.includes("operasional")) {
+            return "⏰ Jam Operasional:<br>Kami siap melayani setiap hari:<br>🕗 08.00 – 20.00 WIB<br><br>Sangat disarankan pesan H-1 atau H-2 ya! 👍";
+        }
+
+        // CARA PESAN (LOGIKA BARU)
+        if (text.includes("pesan") || text.includes("order") || text.includes("cara")) {
+            return "📦Cara Pemesanan:<br>1️⃣ Pilih Menu & Porsi<br>2️⃣ Kirim Detail (Tgl/Lokasi) ke WA Admin<br>3️⃣ Konfirmasi & Pembayaran<br>4️⃣ Duduk manis, makanan kami antar! ✅";
+        }
+
+        // KEUNGGULAN (LOGIKA BARU)
+        if (text.includes("unggul") || text.includes("kenapa") || text.includes("kelebihan")) {
+            return "🧑‍🍳 Kenapa Pilih Yayubi?<br>" +
+                   "✔️ Fresh: Dimasak dadakan sesuai pesanan 🍲<br>" +
+                   "✔️ Lezat: Rasa mantap di lidah 👅<br>" +
+                   "✔️ Higienis: Bersih & bahan bermutu ✨<br>" +
+                   "✔️ Ontime: Pengiriman tepat waktu ⏱️";
+        }
+
+        return "Ada lagi yang bisa saya bantu soal Menu, Harga, atau Area Pengiriman? 😊🍱";
+    }
+</script>
+</body>
+</html>
