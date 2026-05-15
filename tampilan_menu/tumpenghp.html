@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Menu Catering - Sajian Penuh Martabat</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hp.css">
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logos">
+    <img src="gambar/logo halal.jpeg">
+    <img src="gambar/logo yayubi.jpeg">
+  </div>
+  <div class="slides" id="slides">
+    <div class="slide"><img src="gambar/Banner nasi tumpeng.png"></div>
+    <div class="slide"><img src="gambar/Banner nasi box.png"></div>
+    <div class="slide"><img src="gambar/Banner snack.png"></div>
+  </div>
+
+  <button class="slider-arrow arrow-prev" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="slider-arrow arrow-next" onclick="moveSlide(1)">&#8250;</button>
+
+  <div class="slider-dots" id="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+
+<div class="nav-back"><button onclick="history.back()">← Kembali</button></div>
+
+<div class="main">
+  <div class="section-header">
+    <span class="badge-terlaris">Paket Terlaris</span>
+    <h1 class="section-title">Menu Tumpeng</h1>
+  </div>
+
+  <div class="paket-grid">
+
+     <div class="card" id="card1">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Besar — Nasi Tumpeng </div>
+          <div class="detail-text">Nikmati sajian lengkap dalam satu paket praktis dan lezat!
+Nasi pulen disajikan dengan lauk pilihan seperti ayam goreng berbumbu, telur, sayur segar, dan sambal nikmat 🌶️</div>
+          <div class="detail-price">Rp600.000</div>
+        
+          <button class="close-btn" onclick="closeDetail('card1')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/tumpeng besar.jpeg" alt="Paket 1">
+        <div class="card-body">
+          <div class="card-tag">Tumpeng Besar</div>
+          <div class="card-desc">Nikmati sajian lengkap dalam satu paket praktis dan lezat!
+Nasi pulen disajikan dengan lauk pilihan seperti...</div>
+          
+          <div class="card-price">Rp600.000 <span>/pax</span></div>
+          <button class="card-btn" onclick="showDetail('card1')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card2">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Kecil — Nasi Tumpeng</div>
+          <div class="detail-text">Sederhana tapi tetap istimewa!
+Tumpeng kecil dengan nasi pulen, dilengkapi lauk pilihan seperti ayam goreng, telur, sayur segar, dan sambal yang menggugah selera 🌶️</div>
+          <div class="detail-price">Rp350.000</div>
+         
+          <button class="close-btn" onclick="closeDetail('card2')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/tumpeng kecil.jpeg" alt="Paket 2">
+        <div class="card-body">
+          <div class="card-tag">Tumpeng Kecil</div>
+          <div class="card-desc">Sederhana tapi tetap istimewa!
+Tumpeng kecil dengan nasi pulen, dilengkapi lauk pilihan seperti...
+</div>
+        
+          <div class="card-price">Rp350.000 <span>/pax</span></div>
+          <button class="card-btn" onclick="showDetail('card2')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+  </div>
+
+  <form action="hp.php". method="POST" id="orderForm">
+    <div class="order-form">
+      <div class="form-header">
+        <h2>Isi Formulir Pesanan</h2>
+        <p>Lengkapi data untuk pesanan Anda</p>
+      </div>
+      <div class="form-body">
+
+        <div class="field" id="f-tanggal">
+          <label>📅 Pilih Tanggal Pengiriman</label>
+          <input type="date" name="tanggal" id="inp-tanggal">
+          <div class="hint">Pilih tanggal terlebih dahulu</div>
+        </div>
+
+        <div class="field">
+          <label>🕐 Jam Pengambilan/Pengiriman</label>
+          <div class="time-select">
+            <select name="jam_mulai" id="jam-from">
+              <option>07.00</option><option>08.00</option><option>09.00</option>
+              <option>10.00</option><option>11.00</option><option>12.00</option>
+            </select>
+            <span class="time-sep">—</span>
+            <select name="jam_selesai" id="jam-to">
+              <option>08.00</option><option>09.00</option><option>10.00</option>
+              <option>11.00</option><option>12.00</option><option>13.00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field" id="f-nama">
+          <label>👤 Nama Pembeli</label>
+          <input type="text" name="nama" id="inp-nama" placeholder="Masukkan nama Anda">
+          <div class="hint">Nama wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-lokasi">
+          <label>📍 Lokasi / Alamat</label>
+          <input type="text" name="lokasi" id="inp-lokasi" placeholder="Masukkan lokasi Anda">
+          <div class="hint">Lokasi wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-telp">
+          <label>📞 Nomor WhatsApp</label>
+          <input type="tel" name="telp" id="inp-telp" placeholder="08xxxxxxxxxx">
+          <div class="hint">Nomor telepon minimal 10 digit</div>
+        </div>
+
+        <div class="field" id="f-menu">
+          <label>🍽 Pilih Menu: Boleh lebih dari 1</label>
+          <div class="menu-options">
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Tumpeng Besar">
+              <span>Tumpeng Besar</span>
+            </label>
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Tumpeng Kecil">
+              <span>Tumpeng Kecil</span>
+            </label>
+          </div>
+          <div class="hint">Pilih minimal 1 menu</div>
+        </div>
+
+        <div class="form-note">📸 Wajib Screenshot dan kirim ke WA Penjual!</div>
+
+        <button type="button" class="btn-order" onclick="konfirmasi()">Konfirmasi Pesanan</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  function showDetail(id) { document.getElementById(id).classList.add('zoomed'); }
+  function closeDetail(id) { document.getElementById(id).classList.remove('zoomed'); }
+
+  let cur = 0;
+  const slides = document.getElementById('slides');
+  const dots = document.querySelectorAll('.dot');
+
+  function moveSlide(dir) {
+    cur = (cur + dir + 3) % 3;
+    slides.style.transform = `translateX(-${cur * (100/3)}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  setInterval(() => moveSlide(1), 5000);
+
+  function konfirmasi() {
+    const nama = document.getElementById('inp-nama').value;
+    const lokasi = document.getElementById('inp-lokasi').value;
+    const telp = document.getElementById('inp-telp').value;
+    const tgl = document.getElementById('inp-tanggal').value;
+    const menus = document.querySelectorAll('input[name="menu[]"]:checked');
+
+    let ok = true;
+
+    if (!nama) { document.getElementById('f-nama').classList.add('error'); ok = false; }
+    else document.getElementById('f-nama').classList.remove('error');
+
+    if (!lokasi) { document.getElementById('f-lokasi').classList.add('error'); ok = false; }
+    else document.getElementById('f-lokasi').classList.remove('error');
+
+    if (telp.length < 10) { document.getElementById('f-telp').classList.add('error'); ok = false; }
+    else document.getElementById('f-telp').classList.remove('error');
+
+    if (!tgl) { document.getElementById('f-tanggal').classList.add('error'); ok = false; }
+    else document.getElementById('f-tanggal').classList.remove('error');
+
+    if (menus.length === 0) { document.getElementById('f-menu').classList.add('error'); ok = false; }
+    else document.getElementById('f-menu').classList.remove('error');
+
+    if (ok) {
+      const menuList = [...menus].map(m => m.value).join(', ');
+      alert(`✅ PESANAN DIKONFIRMASI!\n\nNama: ${nama}\nMenu: ${menuList}\nTanggal: ${tgl}\n\nSilakan Screenshot & Kirim ke WA!`);
+      document.getElementById('orderForm').submit();
+    }
+  }
+</script>
+</body>
+</html>

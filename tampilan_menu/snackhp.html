@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Menu Catering - Sajian Penuh Martabat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="hp.css">
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logos">
+    <img src="gambar/logo halal.jpeg">
+    <img src="gambar/logo yayubi.jpeg">
+  </div>
+  <div class="slides" id="slides">
+    <div class="slide"><img src="gambar/Banner nasi tumpeng.png"></div>
+    <div class="slide"><img src="gambar/Banner nasi box.png"></div>
+    <div class="slide"><img src="gambarBanner snack.png"></div>
+  </div>
+  
+  <button class="slider-arrow arrow-prev" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="slider-arrow arrow-next" onclick="moveSlide(1)">&#8250;</button>
+
+  <div class="slider-dots" id="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+
+<div class="nav-back"><button onclick="window.scrollTo({top:0, behavior:'smooth'})">← Kembali </button></div>
+
+<div class="main">
+  <div class="section-header">
+    <span class="badge-terlaris">Paket Terlaris</span>
+    <h1 class="section-title">Menu Catering</h1>
+  </div>
+
+  <div class="paket-grid">
+      <div class="card" id="card1">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Kroket</div>
+          <div class="detail-text">Kroket goreng keemasan dengan isian kentang lembut berbumbu. Luar renyah, dalam gurih — cocok untuk camilan atau pelengkap acara 😋</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card1')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/kroket.jpeg" alt="Kroket">
+        <div class="card-body">
+          <div class="card-tag">Kroket</div>
+          <div class="card-desc">Goreng keemasan, isian kentang lembut berbumbu. Luar renyah, dalam gurih!</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card1')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card2">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Risole Mayo</div>
+          <div class="detail-text">Kulit dadar tipis nan lembut diisi mayo creamy, sayuran segar, dan telur. Digigit sekali langsung ketagihan! 🥚</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card2')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/risol mayo.jpeg" alt="Risole Mayo">
+        <div class="card-body">
+          <div class="card-tag">Risole Mayo</div>
+          <div class="card-desc">Kulit lembut isi mayo creamy, sayur segar, dan telur. Sekali gigit langsung ketagihan!</div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card2')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card3">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Putu Ayu</div>
+          <div class="detail-text">Kue tradisional lembut berwarna hijau pandan dengan taburan kelapa parut di atasnya. Manis alami, harum, bikin rindu kampung halaman 🌿</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card3')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/putu ayu.jpeg" alt="Putu Ayu">
+        <div class="card-body">
+          <div class="card-tag">Putu Ayu</div>
+          <div class="card-desc">Kue hijau pandan lembut bertabur kelapa parut. Manis alami dan harum menggoda!</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card3')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card4">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Lemper</div>
+          <div class="detail-text">Ketan pulen gurih dibalut daun pisang, berisi ayam suwir berbumbu rempah khas. Camilan legendaris yang selalu hadir di setiap perayaan 🍃</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card4')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/lemper.jpeg" alt="Lemper">
+        <div class="card-body">
+          <div class="card-tag">Lemper</div>
+          <div class="card-desc">Ketan pulen isi ayam suwir berbumbu rempah, dibalut daun pisang yang harum.</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card4')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card5">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Klepon</div>
+          <div class="detail-text">Bola-bola ketan kenyal hijau pandan dengan kejutan gula merah cair di dalamnya, berselimut kelapa parut segar. Legit dan bikin senyum! 🤤</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card5')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/klepon.jpeg" alt="Klepon">
+        <div class="card-body">
+          <div class="card-tag">Klepon</div>
+          <div class="card-desc">Bola ketan kenyal isi gula merah cair yang meledak di mulut, balutan kelapa parut segar!</div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card5')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card6">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nagasari</div>
+          <div class="detail-text">Kue tepung beras lembut berisi irisan pisang manis, dikukus dalam balutan daun pisang. Aroma harum khas dan tekstur lumer di lidah 🍌</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card6')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/nagasari.jpeg" alt="Nagasari">
+        <div class="card-body">
+          <div class="card-tag">Nagasari</div>
+          <div class="card-desc">Kue tepung beras lembut isi pisang manis, dikukus dalam balutan daun pisang harum.</div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card6')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card7">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Dadar Gulung</div>
+          <div class="detail-text">Kulit dadar tipis berwarna hijau pandan diisi kelapa parut masak gula merah yang manis legit. Digulung rapi, enak dinikmati kapan saja 🥥</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card7')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/dadar gulung.jpeg" alt="Dadar Gulung">
+        <div class="card-body">
+          <div class="card-tag">Dadar Gulung</div>
+          <div class="card-desc">Kulit pandan tipis lembut isi kelapa manis gula merah yang legit dan menggoda.</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card7')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card8">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Onde Onde Mochi</div>
+          <div class="detail-text">Bola kenyal bertabur wijen dengan isian kacang hijau yang lumer. Perpaduan tekstur mochi lembut dan biji wijen renyah yang tak terlupakan 🌾</div>
+          <div class="detail-price">Rp3.500</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card8')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/onde onde.jpeg" alt="Onde Onde Mochi">
+        <div class="card-body">
+          <div class="card-tag">Onde Onde Mochi</div>
+          <div class="card-desc">Bola mochi kenyal bertabur wijen, isi kacang hijau lumer. Renyah di luar, lembut di dalam!</div>
+          <div class="card-price">Rp3.500 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card8')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card9">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Pukis</div>
+          <div class="detail-text">Kue berbentuk setengah bulan yang empuk dan manis, dipanggang hingga bagian bawahnya kecokelatan sempurna. Cocok untuk semua usia, enak hangat maupun dingin 🌙</div>
+          <div class="detail-price">Rp3.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card9')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/pukis.jpeg" alt="Pukis">
+        <div class="card-body">
+          <div class="card-tag">Pukis</div>
+          <div class="card-desc">Kue setengah bulan empuk dan manis, dipanggang kecokelatan. Enak hangat maupun dingin!</div>
+          <div class="card-price">Rp3.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card9')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card10">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Macaroni Schootel</div>
+          <div class="detail-text">Macaroni panggang creamy dengan saus béchamel gurih dan taburan keju meleleh di atasnya. Snack modern favorit semua kalangan 🧀</div>
+          <div class="detail-price">Rp4.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card10')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/macroni scothel.jpeg" alt="Macaroni Schootel">
+        <div class="card-body">
+          <div class="card-tag">Macaroni Schootel</div>
+          <div class="card-desc">Macaroni panggang creamy saus gurih dengan taburan keju meleleh. Favorit semua kalangan!</div>
+          <div class="card-price">Rp4.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card10')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="card11">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Brownies</div>
+          <div class="detail-text">Brownies coklat moist dan fudgy, manis legit dengan aroma coklat pekat yang menggoda. Lembut di dalam, sedikit krispi di luar — bikin nagih! 🍫</div>
+          <div class="detail-price">Rp5.000</div>
+          <div class="detail-price-label">/pcs</div>
+          <button class="close-btn" onclick="closeDetail('card11')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/brownies.jpeg" alt="Brownies">
+        <div class="card-body">
+          <div class="card-tag">Brownies</div>
+          <div class="card-desc">Coklat moist dan fudgy, manis legit beraroma coklat pekat. Lembut di dalam, krispi di luar!</div>
+          <div class="card-price">Rp5.000 <span>/pcs</span></div>
+          <button class="card-btn" onclick="showDetail('card11')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+  </div>
+
+  <form action="hp.php" method="POST" id="orderForm">
+    <div class="order-form">
+      <div class="form-header">
+        <h2>Isi Formulir Pesanan</h2>
+        <p>Lengkapi data untuk pesanan Anda</p>
+      </div>
+      <div class="form-body">
+        
+        <div class="field" id="f-tanggal">
+          <label>📅 Pilih Tanggal Pengiriman</label>
+          <input type="date" name="tanggal" id="inp-tanggal">
+          <div class="hint">Pilih tanggal terlebih dahulu</div>
+        </div>
+
+        <div class="field">
+          <label>🕐 Jam Pengambilan/Pengiriman</label>
+          <div class="time-select">
+            <select name="jam_mulai" id="jam-from">
+              <option>07.00</option><option>08.00</option><option>09.00</option>
+              <option>10.00</option><option>11.00</option><option>12.00</option>
+            </select>
+            <span class="time-sep">—</span>
+            <select name="jam_selesai" id="jam-to">
+              <option>08.00</option><option>09.00</option><option>10.00</option>
+              <option>11.00</option><option>12.00</option><option>13.00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field" id="f-nama">
+          <label>👤 Nama Pembeli</label>
+          <input type="text" name="nama" id="inp-nama" placeholder="Masukkan nama Anda">
+          <div class="hint">Nama wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-lokasi">
+          <label>📍 Lokasi / Alamat</label>
+          <input type="text" name="lokasi" id="inp-lokasi" placeholder="Masukkan lokasi Anda">
+          <div class="hint">Lokasi wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-telp">
+          <label>📞 Nomor WhatsApp</label>
+          <input type="tel" name="telp" id="inp-telp" placeholder="08xxxxxxxxxx">
+          <div class="hint">Nomor telepon minimal 10 digit</div>
+        </div>
+
+        <div class="field" id="f-menu">
+          <label>🍽 Pilih Menu : Boleh lebih dari 1</label>
+          <div class="menu-options">
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Kroket"><span>Kroket</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Risole Mayo"><span>Risole Mayo</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Putu Ayu"><span>Putu Ayu</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Lemper"><span>Lemper</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Klepon"><span>Klepon</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Nagasari"><span>Nagasari</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Dadar Gulung"><span>Dadar Gulung</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Onde Onde"><span>Onde Onde Mochi</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Pukis"><span>Pukis</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Macaroni"><span>Macaroni Schootel</span></label>
+            <label class="menu-option"><input type="checkbox" name="menu[]" value="Brownies"><span>Brownies</span></label>
+          </div>
+          <div class="hint">Pilih minimal 1 menu</div>
+        </div>
+
+        <div class="form-note">📸 Wajib Screenshot dan kirim ke WA Penjual!</div>
+        
+        <button type="button" class="btn-order" onclick="konfirmasi()">Konfirmasi Pesanan</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  function showDetail(id) { document.getElementById(id).classList.add('zoomed'); }
+  function closeDetail(id) { document.getElementById(id).classList.remove('zoomed'); }
+
+  let cur = 0;
+  const slides = document.getElementById('slides');
+  const dots = document.querySelectorAll('.dot');
+
+  function moveSlide(dir) {
+    cur = (cur + dir + 3) % 3;
+    updateSlider();
+  }
+
+  function updateSlider() {
+    slides.style.transform = `translateX(-${cur * (100/3)}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  setInterval(() => moveSlide(1), 5000);
+
+  function konfirmasi() {
+    const nama = document.getElementById('inp-nama').value;
+    const lokasi = document.getElementById('inp-lokasi').value;
+    const telp = document.getElementById('inp-telp').value;
+    const tgl = document.getElementById('inp-tanggal').value;
+    const menus = document.querySelectorAll('input[name="menu[]"]:checked');
+
+    let ok = true;
+    
+    if(!nama) { document.getElementById('f-nama').classList.add('error'); ok = false; }
+    else document.getElementById('f-nama').classList.remove('error');
+
+    if(!lokasi) { document.getElementById('f-lokasi').classList.add('error'); ok = false; }
+    else document.getElementById('f-lokasi').classList.remove('error');
+
+    if(telp.length < 10) { document.getElementById('f-telp').classList.add('error'); ok = false; }
+    else document.getElementById('f-telp').classList.remove('error');
+
+    if(!tgl) { document.getElementById('f-tanggal').classList.add('error'); ok = false; }
+    else document.getElementById('f-tanggal').classList.remove('error');
+
+    if(menus.length === 0) { document.getElementById('f-menu').classList.add('error'); ok = false; }
+    else document.getElementById('f-menu').classList.remove('error');
+
+    if(ok) {
+      const menuList = [...menus].map(m => m.value).join(', ');
+      alert(`✅ PESANAN DIKONFIRMASI!\n\nNama: ${nama}\nMenu: ${menuList}\nTanggal: ${tgl}\n\nSilakan Screenshot & Kirim ke WA!`);
+      // Submit form ke PHP setelah alert
+      document.getElementById('orderForm').submit();
+    }
+  }
+</script>
+</body>
+</html>

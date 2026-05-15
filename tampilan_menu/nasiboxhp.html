@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Menu Catering - Sajian Penuh Martabat</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hp.css">
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logos">
+    <img src="gambar/logo halal.jpeg">
+    <img src="gambar/logo yayubi.jpeg">
+  </div>
+  <div class="slides" id="slides">
+    <div class="slide"><img src="gambar/Banner nasi tumpeng.png"></div>
+    <div class="slide"><img src="gambar/Banner nasi box.png"></div>
+    <div class="slide"><img src="gambar/Banner snack.png"></div>
+  </div>
+  <button class="slider-arrow arrow-prev" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="slider-arrow arrow-next" onclick="moveSlide(1)">&#8250;</button>
+  <div class="slider-dots" id="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+
+<div class="nav-back"><button onclick="history.back()">← Kembali</button></div>
+
+<div class="main">
+  <div class="section-header">
+    <span class="badge-terlaris">Paket Terlaris</span>
+    <h1 class="section-title">Menu Catering</h1>
+  </div>
+
+  <div class="paket-grid">
+
+    <div class="card" id="card1">
+      <div class="card-detail-overlay">
+        <div class="detail-title">Nasi Dus Ayam Bakar</div>
+        <div class="detail-text">Nasi + Ayam Bakar + Sambal + Lalap 🔥</div>
+        <div class="detail-price">Rp20.000</div>
+        <div class="detail-price-label">/dus</div>
+        <button class="close-btn" onclick="closeDetail('card1')">✕ Tutup</button>
+      </div>
+      <img class="card-img" src="gambar/nasiayamgbakarsambellalap.jpeg" alt="Nasi Dus Ayam Bakar">
+      <div class="card-body">
+        <div class="card-tag">Nasi Dus Ayam Bakar</div>
+        <div class="card-desc">Nasi + Ayam Bakar + Sambal + Lalap</div>
+        <div class="card-price">Rp20.000 <span style="font-size:10px;font-weight:500;color:#aaa">/dus</span></div>
+        <button class="card-btn" onclick="showDetail('card1')">👁 Detail</button>
+      </div>
+    </div>
+
+    <div class="card" id="card2">
+      <div class="card-detail-overlay">
+        <div class="detail-title">Nasi Dus Ayam Goreng</div>
+        <div class="detail-text">Nasi + Ayam Goreng + Sambal + Lalap 🍗</div>
+        <div class="detail-price">Rp20.000</div>
+        <div class="detail-price-label">/dus</div>
+        <button class="close-btn" onclick="closeDetail('card2')">✕ Tutup</button>
+      </div>
+      <img class="card-img" src="gambar/nasiayamgorengsambellalap.jpeg" alt="Nasi Dus Ayam Goreng">
+      <div class="card-body">
+        <div class="card-tag">Nasi Dus Ayam Goreng</div>
+        <div class="card-desc">Nasi + Ayam Goreng + Sambal + Lalap</div>
+        <div class="card-price">Rp20.000 <span style="font-size:10px;font-weight:500;color:#aaa">/dus</span></div>
+        <button class="card-btn" onclick="showDetail('card2')">👁 Detail</button>
+      </div>
+    </div>
+
+    <div class="card" id="card3">
+      <div class="card-detail-overlay">
+        <div class="detail-title">Nasi Dus Lengkap</div>
+        <div class="detail-text">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur Bulat 🍜</div>
+        <div class="detail-price">Rp25.000</div>
+        <div class="detail-price-label">/dus</div>
+        <button class="close-btn" onclick="closeDetail('card3')">✕ Tutup</button>
+      </div>
+      <img class="card-img" src="gambar/nasi capcay.jpeg" alt="Nasi Dus Lengkap">
+      <div class="card-body">
+        <div class="card-tag">Nasi Dus Capcay</div>
+        <div class="card-desc">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur</div>
+        <div class="card-price">Rp25.000 <span style="font-size:10px;font-weight:500;color:#aaa">/dus</span></div>
+        <button class="card-btn" onclick="showDetail('card3')">👁 Detail</button>
+      </div>
+    </div>
+
+    <div class="card" id="card4">
+      <div class="card-detail-overlay">
+        <div class="detail-title">Nasi Dus Gudangan</div>
+        <div class="detail-text">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat 🥗</div>
+        <div class="detail-price">Rp20.000</div>
+        <div class="detail-price-label">/dus</div>
+        <button class="close-btn" onclick="closeDetail('card4')">✕ Tutup</button>
+      </div>
+      <img class="card-img" src="gambar/nasi gudangan.jpeg" alt="Nasi Dus Gudangan">
+      <div class="card-body">
+        <div class="card-tag">Nasi Dus Gudangan</div>
+        <div class="card-desc">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat</div>
+        <div class="card-price">Rp20.000 <span style="font-size:10px;font-weight:500;color:#aaa">/dus</span></div>
+        <button class="card-btn" onclick="showDetail('card4')">👁 Detail</button>
+      </div>
+    </div>
+
+    <div class="card" id="card5">
+      <div class="card-detail-overlay">
+        <div class="detail-title">Nasi Dus Kering Tempe</div>
+        <div class="detail-text">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk 🥚</div>
+        <div class="detail-price">Rp25.000</div>
+        <div class="detail-price-label">/dus</div>
+        <button class="close-btn" onclick="closeDetail('card5')">✕ Tutup</button>
+      </div>
+      <img class="card-img" src="gambar/nasi kering tempe.jpeg" alt="Nasi Dus Kering Tempe">
+      <div class="card-body">
+        <div class="card-tag">Nasi Dus Kering Tempe</div>
+        <div class="card-desc">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk</div>
+        <div class="card-price">Rp25.000 <span style="font-size:10px;font-weight:500;color:#aaa">/dus</span></div>
+        <button class="card-btn" onclick="showDetail('card5')">👁 Detail</button>
+      </div>
+    </div>
+  </div>
+
+  <form action="hp.php" method="POST" id="orderForm">
+    <div class="order-form">
+      <div class="form-header">
+        <h2>Isi Formulir Pesanan</h2>
+        <p>Lengkapi data untuk pesanan Anda</p>
+      </div>
+      <div class="form-body">
+
+        <div class="field" id="f-tanggal">
+          <label>📅 Pilih Tanggal Pengiriman</label>
+          <input type="date" name="tanggal" id="inp-tanggal">
+          <div class="hint">Pilih tanggal terlebih dahulu</div>
+        </div>
+
+        <div class="field">
+          <label>🕐 Jam Pengambilan/Pengiriman</label>
+          <div class="time-select">
+            <select name="jam_mulai" id="jam-from">
+              <option>07.00</option><option>08.00</option><option>09.00</option>
+              <option>10.00</option><option>11.00</option><option>12.00</option>
+            </select>
+            <span class="time-sep">—</span>
+            <select name="jam_selesai" id="jam-to">
+              <option>08.00</option><option>09.00</option><option>10.00</option>
+              <option>11.00</option><option>12.00</option><option>13.00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field" id="f-nama">
+          <label>👤 Nama Pembeli</label>
+          <input type="text" name="nama" id="inp-nama" placeholder="Masukkan nama Anda">
+          <div class="hint">Nama wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-lokasi">
+          <label>📍 Lokasi / Alamat</label>
+          <input type="text" name="lokasi" id="inp-lokasi" placeholder="Masukkan lokasi Anda">
+          <div class="hint">Lokasi wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-telp">
+          <label>📞 Nomor WhatsApp</label>
+          <input type="tel" name="telp" id="inp-telp" placeholder="08xxxxxxxxxx">
+          <div class="hint">Nomor telepon minimal 10 digit</div>
+        </div>
+
+        <div class="field" id="f-menu">
+          <label>🍱 Pilih Menu : Boleh lebih dari 1</label>
+          <div class="menu-options">
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Nasi Dus Ayam Bakar (Rp20.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Ayam Bakar</span>
+                <span class="menu-option-desc">Nasi + Ayam Bakar + Sambal + Lalap</span>
+              </div>
+            </label>
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Nasi Dus Ayam Goreng (Rp20.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Ayam Goreng</span>
+                <span class="menu-option-desc">Nasi + Ayam Goreng + Sambal + Lalap</span>
+              </div>
+            </label>
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Nasi Dus Lengkap (Rp25.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Lengkap</span>
+                <span class="menu-option-desc">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur</span>
+              </div>
+            </label>
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Nasi Dus Gudangan (Rp20.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Gudangan</span>
+                <span class="menu-option-desc">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat</span>
+              </div>
+            </label>
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Nasi Dus Kering Tempe (Rp25.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Kering Tempe</span>
+                <span class="menu-option-desc">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk</span>
+              </div>
+            </label>
+          </div>
+          <div class="hint">Pilih minimal 1 menu</div>
+        </div>
+
+        <div class="form-note">📸 Wajib Screenshot dan kirim ke WA Penjual!</div>
+        <button type="button" class="btn-order" onclick="konfirmasi()">Konfirmasi Pesanan</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  function showDetail(id) { document.getElementById(id).classList.add('zoomed'); }
+  function closeDetail(id) { document.getElementById(id).classList.remove('zoomed'); }
+
+  let cur = 0;
+  const slides = document.getElementById('slides');
+  const dots = document.querySelectorAll('.dot');
+
+  function moveSlide(dir) {
+    cur = (cur + dir + 3) % 3;
+    slides.style.transform = `translateX(-${cur * (100/3)}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  setInterval(() => moveSlide(1), 5000);
+
+  function konfirmasi() {
+    const nama = document.getElementById('inp-nama').value;
+    const lokasi = document.getElementById('inp-lokasi').value;
+    const telp = document.getElementById('inp-telp').value;
+    const tgl = document.getElementById('inp-tanggal').value;
+    const menus = document.querySelectorAll('input[name="menu[]"]:checked');
+    const jamFrom = document.getElementById('jam-from').value;
+    const jamTo = document.getElementById('jam-to').value;
+
+    let ok = true;
+
+    if (!nama) { document.getElementById('f-nama').classList.add('error'); ok = false; }
+    else document.getElementById('f-nama').classList.remove('error');
+
+    if (!lokasi) { document.getElementById('f-lokasi').classList.add('error'); ok = false; }
+    else document.getElementById('f-lokasi').classList.remove('error');
+
+    if (telp.length < 10) { document.getElementById('f-telp').classList.add('error'); ok = false; }
+    else document.getElementById('f-telp').classList.remove('error');
+
+    if (!tgl) { document.getElementById('f-tanggal').classList.add('error'); ok = false; }
+    else document.getElementById('f-tanggal').classList.remove('error');
+
+    if (menus.length === 0) { document.getElementById('f-menu').classList.add('error'); ok = false; }
+    else document.getElementById('f-menu').classList.remove('error');
+
+    if (ok) {
+      const menuList = [...menus].map(m => m.value).join('\n- ');
+      alert(`✅ Pesanan dikonfirmasi!\n\nNama: ${nama}\nLokasi: ${lokasi}\nTelpon: ${telp}\nTanggal: ${tgl}\nJam: ${jamFrom} - ${jamTo}\nMenu:\n- ${menuList}\n\nSilakan screenshot dan kirim ke WA penjual!`);
+      document.getElementById('orderForm').submit();
+    }
+  }
+
+  document.querySelectorAll('.field input').forEach(inp => {
+    inp.addEventListener('input', () => inp.closest('.field').classList.remove('error'));
+  });
+  document.querySelectorAll('input[name="menu[]"]').forEach(cb => {
+    cb.addEventListener('change', () => document.getElementById('f-menu').classList.remove('error'));
+  });
+</script>
+</body>
+</html>
