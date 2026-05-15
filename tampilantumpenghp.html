@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Menu Catering - Sajian Penuh Martabat</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #E8470A;
+    --orange-light: #F97316;
+    --text-dark: #1a1a1a;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to top, #E8470A 0%, #F97316 15%, #FDE8D8 35%, #FFF8F0 60%, #FAF5EE 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ─── HERO SLIDER ─── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #E8470A;
+  }
+
+  .slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .slide {
+    width: calc(100% / 3);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #E8470A;
+  }
+
+  .hero-logos {
+    position: absolute; top: 10px; left: 10px;
+    display: flex; gap: 6px; z-index: 20;
+  }
+  .hero-logos img {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 2px solid white; background: white;
+  }
+
+  .slider-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.3); border: none; color: white;
+    width: 35px; height: 35px; border-radius: 50%; font-size: 20px;
+    z-index: 30; display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .arrow-prev { left: 10px; }
+  .arrow-next { right: 10px; }
+
+  .slider-dots {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; z-index: 20;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.4); }
+  .dot.active { background: white; width: 18px; border-radius: 4px; }
+
+  /* ─── NAV & MAIN ─── */
+  .nav-back { background: var(--orange); padding: 10px 15px; }
+  .nav-back button {
+    background: white; border: none; color: var(--orange);
+    font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer;
+  }
+
+  .main { padding: 20px 12px 60px; }
+  .section-header { text-align: center; margin-bottom: 20px; }
+  .badge-terlaris {
+    background: var(--orange); color: white; font-size: 10px;
+    font-weight: 700; padding: 5px 15px; border-radius: 50px; text-transform: uppercase;
+  }
+  .section-title { font-size: 28px; font-weight: 800; color: var(--orange); margin-top: 5px; }
+
+  /* ─── GRID MENU (ZOOM EFFECT) ─── */
+  .paket-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    background: white; border-radius: 12px; overflow: hidden;
+    border: 1px solid #fde0cc; position: relative;
+    box-shadow: 0 4px 10px rgba(232,71,10,0.1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .card:active, .card:hover {
+    transform: scale(1.04);
+    z-index: 2;
+    box-shadow: 0 8px 20px rgba(232,71,10,0.2);
+  }
+
+  .card-img { width: 100%; height: 110px; object-fit: cover; transition: 0.3s; }
+  .card-body { padding: 10px; }
+  .card-tag { font-size: 11px; font-weight: 700; color: var(--orange); margin-bottom: 2px; }
+  .card-desc { font-size: 9.5px; color: #777; line-height: 1.3; height: 36px; overflow: hidden; margin-bottom: 6px; }
+  .card-price { font-size: 13px; font-weight: 800; color: var(--orange); }
+
+  .card-btn {
+    width: 100%; padding: 7px 0; border-radius: 50px;
+    border: 1.5px solid var(--orange); background: transparent;
+    color: var(--orange); font-size: 10px; font-weight: 600; margin-top: 8px;
+    cursor: pointer; transition: 0.2s;
+  }
+  .card-btn:active { background: var(--orange); color: white; }
+
+  /* DETAIL OVERLAY */
+  .card-detail-overlay {
+    position: absolute; inset: 0; background: rgba(232,71,10,0.96);
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; padding: 12px; opacity: 0; pointer-events: none;
+    transition: 0.3s; z-index: 5; text-align: center;
+  }
+  .card.zoomed .card-detail-overlay { opacity: 1; pointer-events: auto; }
+  .detail-title { color: white; font-size: 13px; font-weight: 800; margin-bottom: 5px; }
+  .detail-text { color: white; font-size: 10px; margin-bottom: 10px; line-height: 1.4; }
+  .close-btn { background: white; color: var(--orange); border: none; font-size: 10px; padding: 5px 12px; border-radius: 20px; font-weight: 700; cursor: pointer; }
+
+  /* ─── FORM PEMESANAN ─── */
+  .order-form { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #fde0cc; box-shadow: 0 10px 25px rgba(232,71,10,0.1); }
+  .form-header { background: var(--orange); color: white; padding: 16px; text-align: center; }
+  .form-header h2 { font-size: 18px; font-weight: 800; }
+  .form-header p { font-size: 11px; opacity: 0.9; }
+  .form-body { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+
+  .field label { font-size: 11.5px; font-weight: 700; color: #555; display: block; margin-bottom: 6px; }
+  .field input, .field select {
+    width: 100%; padding: 12px; border: 1.5px solid #f0ddd0; border-radius: 10px;
+    font-family: 'Poppins', sans-serif; font-size: 13px; background: #fffaf7; outline: none;
+  }
+
+  .time-select { display: flex; align-items: center; border: 1.5px solid #f0ddd0; border-radius: 10px; background: #fffaf7; overflow: hidden; }
+  .time-select select { border: none; flex: 1; padding: 12px; background: transparent; font-family: inherit; }
+  .time-sep { padding: 0 5px; color: #aaa; font-weight: bold; }
+
+  .menu-options {
+    border: 1.5px solid #f0ddd0; border-radius: 10px;
+    overflow: hidden; background: #fffaf7;
+  }
+  .menu-option { display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid #f5e8de; transition: 0.2s; }
+  .menu-option:last-child { border-bottom: none; }
+  .menu-option:active { background: #fff3ec; }
+  .menu-option input { width: 18px; height: 18px; accent-color: var(--orange); }
+  .menu-option span { font-size: 12.5px; font-weight: 600; color: #333; }
+
+  .form-note { font-size: 11px; color: var(--orange); text-align: center; font-weight: 600; background: #fff3ec; padding: 10px; border-radius: 10px; border: 1px dashed var(--orange); }
+
+  .btn-order {
+    background: var(--orange); color: white; border: none; padding: 15px;
+    border-radius: 12px; font-weight: 800; font-size: 15px;
+    box-shadow: 0 4px 12px rgba(232,71,10,0.3);
+    transition: 0.2s; cursor: pointer;
+  }
+  .btn-order:active { transform: scale(0.97); background: #c73d08; }
+
+  .error input, .error .menu-options { border-color: #e05 !important; border-width: 2px !important; }
+  .hint { color: #e05; font-size: 10px; margin-top: 4px; display: none; font-weight: 600; }
+  .error .hint { display: block; }
+
+  @media(max-width: 360px) { .paket-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logos">
+    <img src="logo halal.jpeg">
+    <img src="logo yayubi.jpeg">
+  </div>
+  <div class="slides" id="slides">
+    <div class="slide"><img src="Banner nasi tumpeng.png"></div>
+    <div class="slide"><img src="Banner nasi box.png"></div>
+    <div class="slide"><img src="Banner snack.png"></div>
+  </div>
+
+  <button class="slider-arrow arrow-prev" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="slider-arrow arrow-next" onclick="moveSlide(1)">&#8250;</button>
+
+  <div class="slider-dots" id="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+
+<div class="nav-back"><button onclick="history.back()">← Kembali</button></div>
+
+<div class="main">
+  <div class="section-header">
+    <span class="badge-terlaris">Paket Terlaris</span>
+    <h1 class="section-title">Menu Tumpeng</h1>
+  </div>
+
+  <div class="paket-grid">
+
+     <!-- Tumpeng Besar  -->
+      <div class="card" id="card1">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Besar — Nasi Tumpeng </div>
+          <div class="detail-text">Nikmati sajian lengkap dalam satu paket praktis dan lezat!
+Nasi pulen disajikan dengan lauk pilihan seperti ayam goreng berbumbu, telur, sayur segar, dan sambal nikmat 🌶️</div>
+          <div class="detail-price">Rp600.000</div>
+        
+          <button class="close-btn" onclick="closeDetail('card1')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="tumpeng besar.jpeg" alt="Paket 1">
+        <div class="card-body">
+          <div class="card-tag">Tumpeng Besar</div>
+          <div class="card-desc">Nikmati sajian lengkap dalam satu paket praktis dan lezat!
+Nasi pulen disajikan dengan lauk pilihan seperti...</div>
+          
+          <div class="card-price">Rp600.000 <span>/pax</span></div>
+          <button class="card-btn" onclick="showDetail('card1')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Tumpeng Kecil -->
+      <div class="card" id="card2">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Kecil — Nasi Tumpeng</div>
+          <div class="detail-text">Sederhana tapi tetap istimewa!
+Tumpeng kecil dengan nasi pulen, dilengkapi lauk pilihan seperti ayam goreng, telur, sayur segar, dan sambal yang menggugah selera 🌶️</div>
+          <div class="detail-price">Rp350.000</div>
+         
+          <button class="close-btn" onclick="closeDetail('card2')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="tumpeng kecil.jpeg" alt="Paket 2">
+        <div class="card-body">
+          <div class="card-tag">Tumpeng Kecil</div>
+          <div class="card-desc">Sederhana tapi tetap istimewa!
+Tumpeng kecil dengan nasi pulen, dilengkapi lauk pilihan seperti...
+</div>
+        
+          <div class="card-price">Rp350.000 <span>/pax</span></div>
+          <button class="card-btn" onclick="showDetail('card2')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+
+  </div>
+
+  <!-- Form Pemesanan -->
+  <div class="order-form">
+    <div class="form-header">
+      <h2>Isi Formulir Pesanan</h2>
+      <p>Lengkapi data untuk pesanan Anda</p>
+    </div>
+    <div class="form-body">
+
+      <div class="field" id="f-tanggal">
+        <label>📅 Pilih Tanggal Pengiriman</label>
+        <input type="date" id="inp-tanggal">
+        <div class="hint">Pilih tanggal terlebih dahulu</div>
+      </div>
+
+      <div class="field">
+        <label>🕐 Jam Pengambilan/Pengiriman</label>
+        <div class="time-select">
+          <select id="jam-from">
+            <option>07.00</option><option>08.00</option><option>09.00</option>
+            <option>10.00</option><option>11.00</option><option>12.00</option>
+          </select>
+          <span class="time-sep">—</span>
+          <select id="jam-to">
+            <option>08.00</option><option>09.00</option><option>10.00</option>
+            <option>11.00</option><option>12.00</option><option>13.00</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field" id="f-nama">
+        <label>👤 Nama Pembeli</label>
+        <input type="text" id="inp-nama" placeholder="Masukkan nama Anda">
+        <div class="hint">Nama wajib diisi</div>
+      </div>
+
+      <div class="field" id="f-lokasi">
+        <label>📍 Lokasi / Alamat</label>
+        <input type="text" id="inp-lokasi" placeholder="Masukkan lokasi Anda">
+        <div class="hint">Lokasi wajib diisi</div>
+      </div>
+
+      <div class="field" id="f-telp">
+        <label>📞 Nomor WhatsApp</label>
+        <input type="tel" id="inp-telp" placeholder="08xxxxxxxxxx">
+        <div class="hint">Nomor telepon minimal 10 digit</div>
+      </div>
+
+      <div class="field" id="f-menu">
+        <label>🍽 Pilih Menu Tumpeng</label>
+        <div class="menu-options">
+          <label class="menu-option">
+            <input type="checkbox" name="menu" value="Tumpeng Besar">
+            <span>Tumpeng Besar</span>
+          </label>
+          <label class="menu-option">
+            <input type="checkbox" name="menu" value="Tumpeng Kecil">
+            <span>Tumpeng Kecil</span>
+          </label>
+        </div>
+        <div class="hint">Pilih minimal 1 menu</div>
+      </div>
+
+      <div class="form-note">📸 Wajib Screenshot dan kirim ke WA Penjual!</div>
+
+      <button class="btn-order" onclick="konfirmasi()">Konfirmasi Pesanan</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showDetail(id) { document.getElementById(id).classList.add('zoomed'); }
+  function closeDetail(id) { document.getElementById(id).classList.remove('zoomed'); }
+
+  let cur = 0;
+  const slides = document.getElementById('slides');
+  const dots = document.querySelectorAll('.dot');
+
+  function moveSlide(dir) {
+    cur = (cur + dir + 3) % 3;
+    slides.style.transform = `translateX(-${cur * (100/3)}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  setInterval(() => moveSlide(1), 5000);
+
+  function konfirmasi() {
+    const nama = document.getElementById('inp-nama').value;
+    const lokasi = document.getElementById('inp-lokasi').value;
+    const telp = document.getElementById('inp-telp').value;
+    const tgl = document.getElementById('inp-tanggal').value;
+    const menus = document.querySelectorAll('input[name=menu]:checked');
+
+    let ok = true;
+
+    if (!nama) { document.getElementById('f-nama').classList.add('error'); ok = false; }
+    else document.getElementById('f-nama').classList.remove('error');
+
+    if (!lokasi) { document.getElementById('f-lokasi').classList.add('error'); ok = false; }
+    else document.getElementById('f-lokasi').classList.remove('error');
+
+    if (telp.length < 10) { document.getElementById('f-telp').classList.add('error'); ok = false; }
+    else document.getElementById('f-telp').classList.remove('error');
+
+    if (!tgl) { document.getElementById('f-tanggal').classList.add('error'); ok = false; }
+    else document.getElementById('f-tanggal').classList.remove('error');
+
+    if (menus.length === 0) { document.getElementById('f-menu').classList.add('error'); ok = false; }
+    else document.getElementById('f-menu').classList.remove('error');
+
+    if (ok) {
+      const menuList = [...menus].map(m => m.value).join(', ');
+      alert(`✅ PESANAN DIKONFIRMASI!\n\nNama: ${nama}\nMenu: ${menuList}\nTanggal: ${tgl}\n\nSilakan Screenshot & Kirim ke WA!`);
+    }
+  }
+</script>
+</body>
+</html>

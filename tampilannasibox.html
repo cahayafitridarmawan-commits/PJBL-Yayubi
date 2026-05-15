@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Catering - Sajian Penuh Martabat</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #E8470A;
+    --orange-light: #F97316;
+    --orange-pale: #FDBA74;
+    --cream: #FFF8F0;
+    --bone: #FAF5EE;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --border: #f0e0d0;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to top, #E8470A 0%, #F97316 15%, #FDE8D8 35%, #FFF8F0 60%, #FAF5EE 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+  }
+
+  /* ─── HERO SLIDER ─── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #E8470A 0%, #c73d08 100%);
+  }
+  @media(min-width:768px){ .hero { height: 320px; } }
+
+  .slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+  }
+  .slide {
+    width: calc(100% / 3);
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .slide-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(232,71,10,0.82) 0%, rgba(200,50,5,0.55) 60%, transparent 100%);
+    display: flex; align-items: center; padding: 0 40px;
+  }
+  .slide-text { color: #fff; max-width: 420px; }
+  .slide-text .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 50px; padding: 4px 14px; font-size: 11px; font-weight: 600;
+    letter-spacing: .05em; text-transform: uppercase; color: #fff;
+    margin-bottom: 10px;
+  }
+  .slide-text h1 {
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    font-weight: 800; line-height: 1.1;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    margin-bottom: 8px;
+  }
+  .slide-text p {
+    font-size: clamp(.75rem, 2vw, .95rem);
+    opacity: .92; font-style: italic; line-height: 1.4;
+  }
+
+  .hero-logos {
+    position: absolute; top: 14px; left: 16px;
+    display: flex; gap: 8px; z-index: 10;
+  }
+  .hero-logos img {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.7);
+    object-fit: cover; background: #fff;
+  }
+
+  .slider-dots {
+    position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 7px; z-index: 10;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.5); border: none; cursor: pointer;
+    transition: all .3s; padding: 0;
+  }
+  .dot.active { background: #fff; width: 22px; border-radius: 4px; }
+
+  .slider-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.25); border: none; cursor: pointer;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 16px; z-index: 10;
+    transition: background .2s;
+  }
+  .slider-arrow:hover { background: rgba(255,255,255,0.45); }
+  .slider-arrow.prev { left: 12px; }
+  .slider-arrow.next { right: 12px; }
+
+  /* ─── NAV BAR ─── */
+  .nav-back { background: var(--orange); padding: 8px 16px; }
+  .nav-back button {
+    background: #fff; border: none; color: var(--orange);
+    font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 14px; border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    transition: background .2s, color .2s;
+  }
+  .nav-back button:hover { background: #fff3ec; }
+  .nav-back button::before { content: '←'; font-size: 14px; font-weight: 900; }
+
+  /* ─── MAIN ─── */
+  .main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 60px; }
+
+  .section-header { text-align: center; margin-bottom: 28px; }
+  .badge-terlaris {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--orange); color: #fff;
+    border-radius: 50px; padding: 6px 18px;
+    font-size: 12px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .badge-terlaris::before { content: '📈'; font-size: 13px; }
+  .section-title { font-size: clamp(1.5rem,4vw,2rem); font-weight: 800; color: var(--orange); }
+  .section-sub { font-size: 13px; color: var(--orange-light); margin-top: 2px; }
+
+  /* ─── CONTENT GRID ─── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  @media(min-width:900px){
+    .content-grid { grid-template-columns: 1fr 420px; }
+  }
+
+  /* ─── PAKET CARDS GRID ─── */
+  .paket-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(232,71,10,0.10);
+    border: 1px solid #fde0cc;
+    transition: transform .2s, box-shadow .2s;
+    position: relative;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(232,71,10,0.18); }
+
+  .card-img {
+    width: 100%; height: 140px; object-fit: cover; display: block;
+    background: #f5e8de;
+  }
+  @media(min-width:600px){ .card-img { height: 160px; } }
+
+  .card-body { padding: 12px 14px 14px; }
+  .card-tag {
+    font-size: 11px; font-weight: 700; color: var(--orange);
+    letter-spacing: .05em; text-transform: uppercase; margin-bottom: 4px;
+  }
+  .card-desc { font-size: 11.5px; color: #777; line-height: 1.45; margin-bottom: 10px; }
+  .card-price-label { font-size: 10px; color: #aaa; margin-bottom: 1px; }
+  .card-price { font-size: 16px; font-weight: 800; color: var(--orange); }
+  .card-price span { font-size: 11px; font-weight: 500; color: #aaa; }
+  .card-btn {
+    display: flex; align-items: center; gap: 6px; justify-content: center;
+    width: 100%; margin-top: 10px;
+    padding: 8px 0; border-radius: 50px;
+    border: 1.5px solid var(--orange); background: transparent;
+    color: var(--orange); font-family: 'Poppins',sans-serif;
+    font-size: 12px; font-weight: 600; cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .card-btn:hover { background: var(--orange); color: #fff; }
+
+  /* ─── CARD DETAIL OVERLAY ─── */
+  .card-detail-overlay {
+    position: absolute; inset: 0;
+    background: rgba(232,71,10,0.92);
+    border-radius: 16px;
+    display: flex; flex-direction: column; justify-content: center;
+    align-items: center; padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s ease;
+    z-index: 5;
+  }
+  .card.zoomed .card-detail-overlay { opacity: 1; pointer-events: auto; }
+  .card-detail-overlay .detail-title {
+    font-size: 14px; font-weight: 800; color: #fff;
+    margin-bottom: 8px; text-transform: uppercase; letter-spacing: .05em;
+    text-align: center;
+  }
+  .card-detail-overlay .detail-text {
+    font-size: 11.5px; color: rgba(255,255,255,0.92); text-align: center;
+    line-height: 1.6; margin-bottom: 12px;
+  }
+  .card-detail-overlay .detail-price {
+    font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 2px;
+  }
+  .card-detail-overlay .detail-price-label {
+    font-size: 11px; color: rgba(255,255,255,0.7);
+  }
+  .card-detail-overlay .close-btn {
+    margin-top: 14px;
+    background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5);
+    color: #fff; border-radius: 50px; padding: 5px 16px;
+    font-family: 'Poppins',sans-serif; font-size: 11px; font-weight: 600;
+    cursor: pointer; transition: background .2s;
+  }
+  .card-detail-overlay .close-btn:hover { background: rgba(255,255,255,0.4); }
+
+  /* ─── ORDER FORM ─── */
+  .order-form {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(232,71,10,0.14);
+    border: 1px solid #fde0cc;
+  }
+  .form-header {
+    background: var(--orange);
+    padding: 18px 24px 14px;
+    text-align: center;
+    color: #fff;
+  }
+  .form-header h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: 2px; }
+  .form-header p { font-size: 12px; opacity: .85; }
+
+  .form-body { padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 14px; }
+
+  .field label {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600; color: #555;
+    margin-bottom: 5px;
+  }
+  .field label .icon { font-size: 13px; }
+
+  .field input, .field select {
+    width: 100%; padding: 10px 14px;
+    border: 1.5px solid #f0ddd0;
+    border-radius: 10px;
+    font-family: 'Poppins',sans-serif; font-size: 13px; color: var(--text-dark);
+    background: #fffaf7;
+    outline: none; transition: border .2s;
+  }
+  .field input::placeholder { color: #bbb; }
+  .field input:focus, .field select:focus { border-color: var(--orange-light); }
+
+  .time-select {
+    display: flex; align-items: center;
+    border: 1.5px solid #f0ddd0; border-radius: 10px;
+    background: #fffaf7; overflow: hidden;
+  }
+  .time-select select {
+    flex: 1; border: none; background: transparent;
+    padding: 10px 10px; font-size: 13px;
+    font-family: 'Poppins',sans-serif; outline: none; color: var(--text-dark);
+  }
+  .time-sep { color: #aaa; font-weight: 700; padding: 0 4px; }
+
+  .menu-options {
+    border: 1.5px solid #f0ddd0;
+    border-radius: 10px;
+    background: #fffaf7;
+    overflow: hidden;
+  }
+  .menu-option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px;
+    border-bottom: 1px solid #f5e8de;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .menu-option:last-child { border-bottom: none; }
+  .menu-option:hover { background: #fff3ec; }
+  .menu-option input[type=checkbox] {
+    width: 16px; height: 16px; accent-color: var(--orange);
+    cursor: pointer; flex-shrink: 0;
+  }
+  .menu-option-info { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+  .menu-option-name { font-size: 12.5px; font-weight: 600; color: var(--text-dark); }
+  .menu-option-desc { font-size: 10.5px; color: #999; line-height: 1.4; }
+  .menu-option-price { font-size: 12px; font-weight: 700; color: var(--orange); white-space: nowrap; }
+
+  .form-note {
+    font-size: 11px; color: var(--orange); text-align: center; font-weight: 500;
+    background: #fff3ec; border-radius: 8px; padding: 8px 12px;
+  }
+
+  .btn-order {
+    width: 100%; padding: 14px;
+    background: var(--orange);
+    color: #fff; border: none;
+    border-radius: 12px;
+    font-family: 'Poppins',sans-serif; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: background .2s, transform .15s;
+    letter-spacing: .02em;
+  }
+  .btn-order:hover { background: #c73d08; transform: translateY(-1px); }
+
+  .hint { font-size: 10.5px; color: #e05; margin-top: 3px; display: none; }
+  .field.error input { border-color: #e05; }
+  .field.error .menu-options { border-color: #e05; box-shadow: 0 0 0 2px rgba(238,0,85,0.12); }
+  .field.error .hint { display: block; }
+
+  @media(max-width:500px){
+    .paket-grid { grid-template-columns: 1fr; }
+    .form-body { padding: 16px; }
+  }
+
+  .slide-custom { overflow: hidden; }
+  .slide-bg-img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO SLIDER ══════════ -->
+<div class="hero">
+  <div class="hero-logos">
+    <img src="logo halal.jpeg">
+    <img src="logo yayubi.jpeg">
+  </div>
+
+  <div class="slides" id="slides">
+    <div class="slide slide-custom">
+      <img class="slide-bg-img" src="Banner nasi tumpeng.png">
+    </div>
+    <div class="slide slide-custom">
+      <img class="slide-bg-img" src="Banner nasi box.png">
+    </div>
+    <div class="slide slide-custom">
+      <img class="slide-bg-img" src="Banner snack.png">
+    </div>
+  </div>
+
+  <button class="slider-arrow prev" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="slider-arrow next" onclick="moveSlide(1)">&#8250;</button>
+
+  <div class="slider-dots">
+    <button class="dot active" onclick="goSlide(0)"></button>
+    <button class="dot" onclick="goSlide(1)"></button>
+    <button class="dot" onclick="goSlide(2)"></button>
+  </div>
+</div>
+
+<!-- ══════════ NAV BACK ══════════ -->
+<div class="nav-back">
+  <button>Kembali</button>
+</div>
+
+<!-- ══════════ MAIN ══════════ -->
+<div class="main">
+
+  <div class="section-header">
+    <div><span class="badge-terlaris">Paket Terlaris</span></div>
+    <div class="section-title">Catering</div>
+    <div class="section-sub">Pilihan terbaik pelanggan kami</div>
+  </div>
+
+  <div class="content-grid">
+
+    <!-- ── PAKET CARDS ── -->
+    <div class="paket-grid">
+
+      <!-- Card 1 -->
+      <div class="card" id="card1">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Ayam Bakar</div>
+          <div class="detail-text">Nasi + Ayam Bakar + Sambal + Lalap 🔥</div>
+          <div class="detail-price">Rp20.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card1')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="nasiayamgbakarsambellalap.jpeg" alt="Nasi Dus Ayam Bakar">
+        <div class="card-body">
+          <div class="card-tag">Nasi Dus Ayam Bakar</div>
+          <div class="card-desc">Nasi + Ayam Bakar + Sambal + Lalap</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp20.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card1')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card" id="card2">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Ayam Goreng</div>
+          <div class="detail-text">Nasi + Ayam Goreng + Sambal + Lalap 🍗</div>
+          <div class="detail-price">Rp20.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card2')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="nasiayamgorengsambellalap.jpeg" alt="Nasi Dus Ayam Goreng">
+        <div class="card-body">
+          <div class="card-tag">Nasi Dus Ayam Goreng</div>
+          <div class="card-desc">Nasi + Ayam Goreng + Sambal + Lalap</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp20.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card2')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card" id="card3">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Lengkap</div>
+          <div class="detail-text">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur Bulat 🍜</div>
+          <div class="detail-price">Rp25.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card3')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="nasi capcay.jpeg" alt="Nasi Dus Lengkap">
+        <div class="card-body">
+          <div class="card-tag">Nasi Dus Capcay</div>
+          <div class="card-desc">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp25.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card3')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card" id="card4">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Gudangan</div>
+          <div class="detail-text">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat 🥗</div>
+          <div class="detail-price">Rp20.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card4')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="nasi gudangan.jpeg" alt="Nasi Dus Gudangan">
+        <div class="card-body">
+          <div class="card-tag">Nasi Dus Gudangan</div>
+          <div class="card-desc">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp20.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card4')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card" id="card5">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Nasi Dus Kering Tempe</div>
+          <div class="detail-text">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk 🥚</div>
+          <div class="detail-price">Rp25.000</div>
+          <div class="detail-price-label">/dus</div>
+          <button class="close-btn" onclick="closeDetail('card5')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="nasi kering tempe.jpeg" alt="Nasi Dus Kering Tempe">
+        <div class="card-body">
+          <div class="card-tag">Nasi Dus Kering Tempe</div>
+          <div class="card-desc">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk</div>
+          <div class="card-price-label">Harga</div>
+          <div class="card-price">Rp25.000 <span>/dus</span></div>
+          <button class="card-btn" onclick="showDetail('card5')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+    </div><!-- /paket-grid -->
+
+    <!-- ── ORDER FORM ── -->
+    <div class="order-form">
+      <div class="form-header">
+        <h2>Pesan Sekarang</h2>
+        <p>Isi formulir untuk melakukan pemesanan</p>
+      </div>
+      <div class="form-body">
+
+        <div class="field" id="f-tanggal">
+          <label><span class="icon">📅</span> Pilih Tanggal</label>
+          <input type="date" id="inp-tanggal">
+          <div class="hint">Pilih tanggal pengiriman</div>
+        </div>
+
+        <div class="field">
+          <label><span class="icon">🕐</span> Jam Pengambilan</label>
+          <div class="time-select">
+            <select id="jam-from">
+              <option>07.00</option><option>08.00</option><option>09.00</option>
+              <option>10.00</option><option>11.00</option><option>12.00</option>
+            </select>
+            <span class="time-sep">—</span>
+            <select id="jam-to">
+              <option>08.00</option><option>09.00</option><option>10.00</option>
+              <option>11.00</option><option>12.00</option><option>13.00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field" id="f-nama">
+          <label><span class="icon">👤</span> Nama Pembeli</label>
+          <input type="text" id="inp-nama" placeholder="Masukkan nama Anda">
+          <div class="hint">Nama pembeli wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-lokasi">
+          <label><span class="icon">📍</span> Lokasi Pembeli</label>
+          <input type="text" id="inp-lokasi" placeholder="Masukkan lokasi Anda">
+          <div class="hint">Lokasi pembeli wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-telp">
+          <label><span class="icon">📞</span> Nomor Telpon</label>
+          <input type="tel" id="inp-telp" placeholder="Masukkan nomor telpon Anda">
+          <div class="hint">Nomor telpon wajib diisi</div>
+        </div>
+
+        <div class="field" id="f-menu">
+          <label><span class="icon">🍱</span> Pilih Menu Makanan</label>
+          <div class="menu-options">
+
+            <label class="menu-option">
+              <input type="checkbox" name="menu" value="Nasi Dus Ayam Bakar (Rp20.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Ayam Bakar</span>
+                <span class="menu-option-desc">Nasi + Ayam Bakar + Sambal + Lalap</span>
+              </div>
+
+            </label>
+
+            <label class="menu-option">
+              <input type="checkbox" name="menu" value="Nasi Dus Ayam Goreng (Rp20.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Ayam Goreng</span>
+                <span class="menu-option-desc">Nasi + Ayam Goreng + Sambal + Lalap</span>
+              </div>
+
+            </label>
+
+            <label class="menu-option">
+              <input type="checkbox" name="menu" value="Nasi Dus Lengkap (Rp25.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Lengkap</span>
+                <span class="menu-option-desc">Nasi + Ayam Goreng + Cap Cay + Bakmi + Sambal + Telur</span>
+              </div>
+              
+            </label>
+
+            <label class="menu-option">
+              <input type="checkbox" name="menu" value="Nasi Dus Gudangan (Rp20.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Gudangan</span>
+                <span class="menu-option-desc">Nasi + Gudangan Sayur + Tahu/Tempe + Telur Bulat</span>
+              </div>
+             
+            </label>
+
+            <label class="menu-option">
+              <input type="checkbox" name="menu" value="Nasi Dus Kering Tempe (Rp25.000)">
+              <div class="menu-option-info">
+                <span class="menu-option-name">Nasi Dus Kering Tempe</span>
+                <span class="menu-option-desc">Nasi + Kering Tempe + Telur Dadar + Sambal Goreng + Kerupuk</span>
+              </div>
+              
+            </label>
+
+          </div>
+          <div class="hint">Pilih minimal 1 menu</div>
+        </div>
+
+        <div class="form-note">📸 Pesanan Wajib Screenshot dan kirim ke WA penjual!!</div>
+
+        <button class="btn-order" onclick="konfirmasi()">Konfirmasi Pesanan</button>
+
+      </div>
+    </div><!-- /order-form -->
+
+  </div><!-- /content-grid -->
+</div><!-- /main -->
+
+<script>
+  function showDetail(id) { document.getElementById(id).classList.add('zoomed'); }
+  function closeDetail(id) { document.getElementById(id).classList.remove('zoomed'); }
+
+  let cur = 0;
+  const total = 3;
+  const slidesEl = document.getElementById('slides');
+  const dots = document.querySelectorAll('.dot');
+
+  function goSlide(n) {
+    cur = (n + total) % total;
+    slidesEl.style.transform = `translateX(-${cur * (100/3)}%)`;
+    dots.forEach((d,i) => d.classList.toggle('active', i===cur));
+  }
+  function moveSlide(dir) { goSlide(cur + dir); }
+  setInterval(() => moveSlide(1), 4000);
+
+  function konfirmasi() {
+    let ok = true;
+
+    function check(fieldId, inputId, checkFn) {
+      const f = document.getElementById(fieldId);
+      const v = document.getElementById(inputId).value.trim();
+      const valid = checkFn(v);
+      f.classList.toggle('error', !valid);
+      if (!valid) ok = false;
+    }
+
+    check('f-nama', 'inp-nama', v => v.length > 0);
+    check('f-lokasi', 'inp-lokasi', v => v.length > 0);
+    check('f-telp', 'inp-telp', v => v.length >= 8);
+    check('f-tanggal', 'inp-tanggal', v => v.length > 0);
+
+    const menus = document.querySelectorAll('input[name=menu]:checked');
+    const fm = document.getElementById('f-menu');
+    if (menus.length === 0) { fm.classList.add('error'); ok = false; }
+    else fm.classList.remove('error');
+
+    if (ok) {
+      const nama = document.getElementById('inp-nama').value;
+      const lokasi = document.getElementById('inp-lokasi').value;
+      const telp = document.getElementById('inp-telp').value;
+      const tanggal = document.getElementById('inp-tanggal').value;
+      const menuList = [...menus].map(m => m.value).join('\n- ');
+      const jamFrom = document.getElementById('jam-from').value;
+      const jamTo = document.getElementById('jam-to').value;
+
+      alert(`✅ Pesanan dikonfirmasi!\n\nNama: ${nama}\nLokasi: ${lokasi}\nTelpon: ${telp}\nTanggal: ${tanggal}\nJam: ${jamFrom} - ${jamTo}\nMenu:\n- ${menuList}\n\nSilakan screenshot dan kirim ke WA penjual!`);
+    }
+  }
+
+  document.querySelectorAll('.field input').forEach(inp => {
+    inp.addEventListener('input', () => inp.closest('.field').classList.remove('error'));
+  });
+  document.querySelectorAll('input[name=menu]').forEach(cb => {
+    cb.addEventListener('change', () => document.getElementById('f-menu').classList.remove('error'));
+  });
+</script>
+</body>
+</html>
