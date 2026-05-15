@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catering Dapoer Yayubi</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-body:   #c9651a;
+  --bg-card:   #fdf0dc;
+  --bg-pill:   #e0a060;
+  --accent:    #8b3a0f;
+  --text-dark: #3d1500;
+  --text-mid:  #6b2a00;
+  --panel-bg:  linear-gradient(180deg, #f0a878 0%, #f7c09a 60%, #fad4b8 100%);
+  --desc-bg:   rgba(120,55,5,0.10);
+  --desc-bdr:  rgba(100,50,0,0.18);
+}
+body {
+  background: var(--bg-body);
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 12px 32px;
+}
+
+/* CARD WRAPPER */
+.card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(50,15,0,0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP HERO ── */
+.hero {
+  background: var(--bg-card);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 20px 22px;
+  gap: 10px;
+}
+.hero-doodle {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0.06;
+}
+.pill {
+  background: var(--bg-pill);
+  border-radius: 20px;
+  padding: 4px 22px;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+.logo-ring {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: white;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(80,30,0,0.18);
+  z-index: 2;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.logo-ring img {
+  width: 120px; height: 120px;
+  border-radius: 50%; object-fit: cover;
+}
+.logo-placeholder {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f0c080 0%, #e08040 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42px;
+}
+.brand {
+  text-align: center;
+  z-index: 2;
+}
+.brand span {
+  display: block;
+  font-family: 'Fredoka One', cursive;
+  color: var(--accent);
+  font-size: 22px;
+  letter-spacing: 2px;
+  line-height: 1.2;
+}
+.tagline {
+  font-size: 10.5px;
+  color: var(--text-mid);
+  font-style: italic;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.7;
+  z-index: 2;
+  padding: 0 8px;
+}
+
+/* ── DESCRIPTION PANEL ── */
+.desc-panel {
+  background: var(--panel-bg);
+  position: relative;
+  overflow: hidden;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.desc-panel-doodle {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0.22;
+}
+.desc-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  z-index: 2;
+  position: relative;
+}
+.chef-emoji { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+.desc-box {
+  background: var(--desc-bg);
+  border-radius: 12px;
+  padding: 12px 13px;
+  border: 1.5px solid var(--desc-bdr);
+  flex: 1;
+}
+.desc-box p {
+  font-size: 10.5px;
+  color: var(--text-dark);
+  line-height: 1.8;
+  font-weight: 700;
+}
+.food-illustration {
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  position: relative;
+}
+
+/* ── CONTACT PANEL ── */
+.contact-panel {
+  background: var(--panel-bg);
+  border-top: 2px solid rgba(139,58,15,0.12);
+  padding: 18px 20px 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-panel-doodle {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: 0.22;
+}
+.contact-section-title {
+  grid-column: 1 / -1;
+  font-family: 'Fredoka One', cursive;
+  color: var(--accent);
+  font-size: 15px;
+  letter-spacing: 1px;
+  z-index: 2;
+  position: relative;
+  border-bottom: 2px dashed rgba(139,58,15,0.2);
+  padding-bottom: 6px;
+}
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 2;
+  position: relative;
+}
+.ct {
+  font-family: 'Fredoka One', cursive;
+  color: #6b2000;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+.ci {
+  font-size: 9.5px;
+  color: #3d1500;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.55;
+  letter-spacing: 0.3px;
+}
+
+/* topbar */
+.topbar {
+  width: 100%; max-width: 400px;
+  margin-bottom: 8px;
+}
+.topbar-label {
+  color: #f5d8b0;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"><span class="topbar-label">personal brand</span></div>
+
+<div class="card">
+
+  <!-- HERO / CENTER -->
+  <div class="hero">
+    <svg class="hero-doodle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#9a5015" stroke-width="1.4">
+        <circle cx="40" cy="38" r="18"/><circle cx="40" cy="38" r="8"/>
+        <ellipse cx="340" cy="28" rx="24" ry="13"/>
+        <path d="M180 230 L205 260 L155 260 Z"/>
+        <ellipse cx="200" cy="60" rx="18" ry="9"/>
+        <path d="M182 60 Q170 54 168 61 Q170 68 182 64"/>
+        <path d="M218 60 Q230 54 232 61 Q230 68 218 64"/>
+        <path d="M185 56 Q180 46 175 44"/><path d="M190 54 Q188 44 186 40"/>
+        <path d="M215 56 Q220 46 225 44"/><path d="M210 54 Q212 44 214 40"/>
+        <rect x="20" y="160" width="50" height="33" rx="6"/>
+        <path d="M70 168 Q82 168 82 176 Q82 184 70 184"/>
+        <path d="M30 158 Q30 148 34 145"/><path d="M40 158 Q40 146 44 143"/>
+        <ellipse cx="360" cy="200" rx="26" ry="13"/>
+        <path d="M334 200 L334 212 Q334 224 360 224 Q386 224 386 212 L386 200"/>
+        <circle cx="360" cy="195" r="4"/><path d="M360 175 L360 191"/>
+      </g>
+    </svg>
+    <div class="pill">Tentang Kami</div>
+    <div class="logo-ring">
+      <!-- Ganti src dengan path logo asli, contoh: src="logoyoyubi.jpeg" -->
+      <img src="logoyoyubi.jpeg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" style="width:120px;height:120px;border-radius:50%;object-fit:cover;">
+      <div class="logo-placeholder" style="display:none;">🍽️</div>
+    </div>
+    <div class="brand">
+      <span>CATERING</span>
+      <span>DAPOER YAYUBI</span>
+    </div>
+    <div class="tagline">"Sajian Penuh Martabat, Halal dalam<br>Setiap Keistimewaan Rasa."</div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="desc-panel">
+    <svg class="desc-panel-doodle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#5a1e00" stroke-width="1.2">
+        <path d="M20 30 Q35 10 55 20 Q70 30 65 50 Q55 65 38 60 Q18 55 20 30Z"/>
+        <path d="M55 20 Q72 8 80 22 Q75 35 65 30"/>
+        <circle cx="32" cy="38" r="3"/>
+        <path d="M320 15 Q335 5 345 15 Q350 25 340 32 Q330 38 320 30 Q315 22 320 15Z"/>
+        <path d="M323 32 L321 52 Q320 55 323 55 L337 55 Q340 55 339 52 L337 32"/>
+        <line x1="321" y1="38" x2="339" y2="38"/><line x1="321" y1="44" x2="339" y2="44"/>
+        <ellipse cx="200" cy="180" rx="30" ry="12"/>
+        <path d="M170 180 L170 193 Q170 206 200 206 Q230 206 230 193 L230 180"/>
+        <path d="M176 178 Q190 170 200 168 Q210 170 224 178"/>
+        <line x1="184" y1="162" x2="196" y2="196"/><line x1="192" y1="160" x2="205" y2="194"/>
+        <ellipse cx="80" cy="150" rx="24" ry="10"/>
+        <path d="M56 150 L56 162 Q56 172 80 172 Q104 172 104 162 L104 150"/>
+        <circle cx="80" cy="145" r="4"/><path d="M80 128 L80 141"/>
+      </g>
+    </svg>
+    <div class="desc-row">
+      <div class="chef-emoji">👨‍🍳</div>
+      <div class="desc-box">
+        <p>Dapoer Yayubi menyediakan layanan catering dengan hidangan enak, bersih, dan dibuat dengan penuh perhatian. Menu bisa disesuaikan untuk berbagai acara, dari kumpul keluarga hingga pesta besar. Menggunakan bahan berkualitas dan cita rasa rumahan, Dapoer Yayubi memastikan makanan tidak hanya menjadi pelengkap acara, tetapi juga membuat momen Anda lebih spesial.</p>
+      </div>
+    </div>
+    <div class="food-illustration">
+      <svg viewBox="0 0 160 115" width="155" height="108" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="80" cy="102" rx="65" ry="13" fill="#2d7a1f" opacity="0.85"/>
+        <ellipse cx="80" cy="99" rx="62" ry="11" fill="#3a9926"/>
+        <path d="M15 99 Q80 90 145 99 Q80 108 15 99Z" fill="#4db830"/>
+        <ellipse cx="80" cy="100" rx="54" ry="8" fill="#1a5c10" opacity="0.28"/>
+        <ellipse cx="75" cy="75" rx="32" ry="21" fill="#f5f0e0"/>
+        <ellipse cx="75" cy="68" rx="28" ry="17" fill="#fffdf5"/>
+        <ellipse cx="75" cy="63" rx="22" ry="12" fill="#ffffff"/>
+        <ellipse cx="66" cy="65" rx="4" ry="2" fill="#ede8d5" opacity="0.7"/>
+        <ellipse cx="78" cy="61" rx="3" ry="1.5" fill="#ede8d5" opacity="0.7"/>
+        <ellipse cx="85" cy="66" rx="4" ry="2" fill="#ede8d5" opacity="0.7"/>
+        <ellipse cx="46" cy="79" rx="17" ry="11" fill="#c85a10"/>
+        <ellipse cx="46" cy="76" rx="15" ry="9" fill="#e06820"/>
+        <path d="M33 76 Q46 69 59 76 Q46 83 33 76Z" fill="#f07830" opacity="0.8"/>
+        <ellipse cx="42" cy="73" rx="5" ry="3" fill="#d4601a" opacity="0.6"/>
+        <ellipse cx="50" cy="71" rx="4" ry="2.5" fill="#c85010" opacity="0.5"/>
+        <ellipse cx="107" cy="73" rx="14" ry="10" fill="#e8a820"/>
+        <ellipse cx="107" cy="71" rx="11" ry="8" fill="#f5c030"/>
+        <ellipse cx="107" cy="70" rx="6" ry="5" fill="#ffd84a"/>
+        <circle cx="107" cy="69" r="3" fill="#ffec80"/>
+        <ellipse cx="90" cy="83" rx="11" ry="5.5" fill="#3a9926"/>
+        <path d="M80 82 Q90 76 100 82 Q90 88 80 82Z" fill="#4db830"/>
+        <rect x="82" y="78" width="3" height="8" rx="1.5" fill="#2d7a1f" transform="rotate(-15,82,82)"/>
+        <rect x="88" y="77" width="3" height="8" rx="1.5" fill="#2d7a1f" transform="rotate(5,88,81)"/>
+        <rect x="94" y="78" width="3" height="8" rx="1.5" fill="#2d7a1f" transform="rotate(20,94,82)"/>
+        <ellipse cx="63" cy="86" rx="10" ry="5.5" fill="#d42010"/>
+        <ellipse cx="63" cy="84" rx="8" ry="4" fill="#e83020"/>
+        <path d="M55 84 Q63 79 71 84 Q63 89 55 84Z" fill="#f04030" opacity="0.7"/>
+        <ellipse cx="122" cy="84" rx="12" ry="7.5" fill="#f8f0d8"/>
+        <ellipse cx="122" cy="82" rx="10" ry="6" fill="#fff8e8"/>
+        <path d="M113 82 Q122 77 131 82" stroke="#e8d8b0" stroke-width="1" fill="none"/>
+        <path d="M113 84 Q122 79 131 84" stroke="#e8d8b0" stroke-width="0.8" fill="none"/>
+        <path d="M115 86 Q122 82 129 86" stroke="#e8d8b0" stroke-width="0.8" fill="none"/>
+        <path d="M18 97 Q80 88 142 97" stroke="#6dd450" stroke-width="1.2" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-panel">
+    <svg class="contact-panel-doodle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#5a1e00" stroke-width="1.2">
+        <path d="M20 30 Q35 10 55 20 Q70 30 65 50 Q55 65 38 60 Q18 55 20 30Z"/>
+        <path d="M55 20 Q72 8 80 22 Q75 35 65 30"/>
+        <circle cx="32" cy="38" r="3"/>
+        <path d="M330 15 Q345 5 360 15 Q365 25 352 32 Q340 38 330 30 Q325 22 330 15Z"/>
+        <path d="M333 32 L331 55 Q330 58 334 58 L348 58 Q352 58 350 55 L348 32"/>
+        <line x1="331" y1="40" x2="350" y2="40"/><line x1="331" y1="47" x2="350" y2="47"/>
+        <ellipse cx="200" cy="170" rx="30" ry="12"/>
+        <path d="M170 170 L170 182 Q170 194 200 194 Q230 194 230 182 L230 170"/>
+        <circle cx="200" cy="165" r="4"/><path d="M200 150 L200 161"/>
+        <path d="M30 140 Q50 125 65 140 Q68 155 50 162 Q32 155 30 140Z"/>
+        <path d="M355 130 L375 165 L335 165 Z"/>
+        <circle cx="355" cy="150" r="3"/><circle cx="348" cy="158" r="2"/><circle cx="362" cy="157" r="2.5"/>
+      </g>
+    </svg>
+    <div class="contact-section-title">📍 Hubungi Kami</div>
+    <div class="contact-item">
+      <div class="ct">ALAMAT</div>
+      <div class="ci">JL. Cinde Barat VII No 5,<br>Semarang, Jawa Tengah.</div>
+    </div>
+    <div class="contact-item">
+      <div class="ct">TELEPHONE</div>
+      <div class="ci">+62 821 3655 1189</div>
+    </div>
+    <div class="contact-item">
+      <div class="ct">EMAIL</div>
+      <div class="ci">Dapoeryayubi<br>@gmail.com</div>
+    </div>
+    <div class="contact-item">
+      <div class="ct">INSTAGRAM</div>
+      <div class="ci">@dapoer_yayubi</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
