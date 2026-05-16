@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu Tumpeng - Catering Yayubi</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="menu.css"> </head>
+<body>
+
+<div class="hero">
+  <div class="hero-logos">
+    <img src="gambar/logo halal.jpeg">
+    <img src="gambar/logo yayubi.jpeg">
+  </div>
+
+  <button class="slider-btn prev-btn" id="prevBtn" type="button">‹</button>
+  <button class="slider-btn next-btn" id="nextBtn" type="button">›</button>
+
+  <div class="slides" id="slides">
+    <div class="slide slide-custom">
+      <img class="slide-bg-img" src="gambar/Banner nasi tumpeng.png">
+    </div>
+    <div class="slide slide-custom">
+      <img class="slide-bg-img" src="gambar/Banner nasi box.png">
+    </div>
+    <div class="slide slide-custom">
+      <img class="slide-bg-img" src="gambar/Banner snack.png">
+    </div>
+  </div>
+</div>
+
+<div class="nav-back">
+  <button onclick="window.history.back()">Kembali</button>
+</div>
+
+<div class="main">
+
+  <div class="section-header">
+    <div><span class="badge-terlaris">Paket Terlaris</span></div>
+    <div class="section-title">Menu Tumpeng</div>
+    <div class="section-sub">Sajian istimewa untuk momen berharga Anda</div>
+  </div>
+
+  <div class="content-grid">
+
+    <div class="paket-grid">
+
+      <div class="card" id="cardT1">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Besar — Nasi Tumpeng</div>
+          <div class="detail-text">Nikmati sajian lengkap dalam satu paket praktis dan lezat! Nasi pulen disajikan dengan lauk pilihan seperti ayam goreng berbumbu, telur, sayur segar, dan sambal nikmat 🌶️</div>
+          <div class="detail-price">Rp600.000</div>
+         
+          <button class="close-btn" onclick="closeDetail('cardT1')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/tumpeng besar.jpeg" alt="Tumpeng Besar">
+        <div class="card-body">
+          <div class="card-tag">Tumpeng</div>
+          <div class="card-desc">Sajian lengkap porsi besar dengan lauk ayam goreng, telur, dan sambal nikmat...</div>
+         
+          <div class="card-price">Rp600.000 <span>/paket</span></div>
+          <button class="card-btn" onclick="showDetail('cardT1')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+      <div class="card" id="cardT2">
+        <div class="card-detail-overlay">
+          <div class="detail-title">Tumpeng Kecil — Nasi Tumpeng</div>
+          <div class="detail-text">Sederhana tapi tetap istimewa! Tumpeng kecil dengan nasi pulen, dilengkapi lauk pilihan seperti ayam goreng, telur, sayur segar, dan sambal yang menggugah selera 🌶️</div>
+          <div class="detail-price">Rp350.000</div>
+         
+          <button class="close-btn" onclick="closeDetail('cardT2')">✕ Tutup</button>
+        </div>
+        <img class="card-img" src="gambar/tumpeng kecil.jpeg" alt="Tumpeng Kecil">
+        <div class="card-body">
+          <div class="card-tag">Tumpeng</div>
+          <div class="card-desc">Sederhana tapi tetap istimewa, porsi pas untuk acara keluarga kecil...</div>
+         
+          <div class="card-price">Rp350.000 <span>/paket</span></div>
+          <button class="card-btn" onclick="showDetail('cardT2')">👁 Lihat Detail →</button>
+        </div>
+      </div>
+
+    </div><div class="order-form">
+      <div class="form-header">
+        <h2>Form Pesanan Tumpeng</h2>
+        <p>Silakan lengkapi data pemesanan di bawah ini</p>
+      </div>
+      
+      <form action="menu.php" method="POST" class="form-body">
+        
+        <input type="hidden" name="kategori" value="TUMPENG">
+
+        <div class="field">
+          <label><span class="icon">📅</span> Pilih Tanggal</label>
+          <input type="date" name="tanggal" required>
+        </div>
+
+        <div class="field">
+          <label><span class="icon">🕐</span> Jam Pengambilan</label>
+          <div class="time-select">
+            <select name="jam_mulai">
+              <option>07.00</option><option>08.00</option><option>09.00</option>
+              <option>10.00</option><option>11.00</option><option>12.00</option>
+            </select>
+            <span class="time-sep">—</span>
+            <select name="jam_selesai">
+              <option>08.00</option><option>09.00</option><option>10.00</option>
+              <option>11.00</option><option>12.00</option><option>13.00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label><span class="icon">👤</span> Nama Pembeli</label>
+          <input type="text" name="nama" placeholder="Masukkan nama Anda" required>
+        </div>
+
+        <div class="field">
+          <label><span class="icon">📍</span> Lokasi Tujuan</label>
+          <input type="text" name="lokasi" placeholder="Masukkan alamat lengkap" required>
+        </div>
+
+        <div class="field">
+          <label><span class="icon">📞</span> Nomor Telpon</label>
+          <input type="tel" name="telp" placeholder="Contoh: 08..." required>
+        </div>
+
+        <div class="field">
+           <label>🍽 Pilih Menu: Boleh lebih dari 1</label>
+          <div class="menu-options">
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Tumpeng Besar"> <span>Tumpeng Besar</span>
+            </label>
+            <label class="menu-option">
+              <input type="checkbox" name="menu[]" value="Tumpeng Kecil"> <span>Tumpeng Kecil</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-note">📸 Pesanan Wajib Screenshot dan kirim ke WA penjual!!</div>
+
+        <button type="submit" class="btn-order">Konfirmasi Pesanan</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showDetail(id) {
+    document.getElementById(id).classList.add('zoomed');
+  }
+  function closeDetail(id) {
+    document.getElementById(id).classList.remove('zoomed');
+  }
+
+  // UBAHAN DISINI: Script disamakan persis dengan logika tombol Nasi Box agar lancar
+  let cur = 0;
+  const slidesEl = document.getElementById('slides');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let timer;
+
+  function updateSlider() {
+    slidesEl.style.transform = `translateX(-${cur * (100 / 3)}%)`;
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      cur = (cur + 1) % 3;
+      updateSlider();
+    }, 4000);
+  }
+
+  nextBtn.addEventListener('click', () => {
+    cur = (cur + 1) % 3;
+    updateSlider();
+    startTimer();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    cur = (cur - 1 + 3) % 3;
+    updateSlider();
+    startTimer();
+  });
+
+  startTimer();
+</script>
+
+</body>
+</html>
